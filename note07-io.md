@@ -89,8 +89,49 @@ NIO bao gồm các lớp và giao diện nằm trong package `java.nio`, nó cun
 ## Interacting with Paths and Files
 Lưu ý: đối tượng `Path` đại diện cho vị trí của file chứ không đại diện cho file. 
 
+### Providing Optional Arguments
+...
+### Using Path Objects
+Path interface cung cấp nhiều hàm.
+#### toString(), getNameCount(), getName()
+```java
+Path path = Paths.get("/land/hippo/harry.happy");
+```
+### getFileName(), getParent(), and getRoot()
+```java
+```
+####  isAbsolute() and toAbsolutePath()
+```java
+Path path1 = Paths.get("C:\\birds\\egret.txt");
+Path path2 = Paths.get("birds/condor.txt");
 
+path1.isAbsolute(); // true
+path1.toAbsolutePath(); //C:\birds\egret.txt
++path2.isAbsolute();// no
++path2.toAbsolutePath(); // home/birds/condor.txt
+```
+Lưu ý rằng việc trả về đúng sai dựa vào hệ điều hành
+```java
+System.out.println(Paths.get("/stripes/zebra.exe").isAbsolute());
+System.out.println(Paths.get("c:/goats/Food.java").isAbsolute());
+```
+#### Creating a New Path with subpath()
+...
+#### Using Path Symbols
+Chúng ta có thể sử dụng `.` hoặc `..` để tham chiếu đến thư mục mẹ. ký tự `.` tham chiếu đến thư mục hiện tại, `..` tham chiếu đến thư mục cha của thư mục hiện tại. Chúng ta có thể sử dụng hàm `relativize()` để tạo path symbols.
+```java
+Path path1 = Paths.get("fish.txt");
+Path path2 = Paths.get("birds.txt");
+System.out.println(path1.relativize(path2)); //..\birds.txt
+System.out.println(path2.relativize(path1)); //..\fish.txt
+```
 
+#### Joining Path Objects with resolve()
+
+#### Cleaning Up a Path with normalize()
+
+#### Checking for File Existence with toRealPath()
+Chúng ta biết rằng một đối tượng Path đại diện cho một đường dẫn và chúng ta không chắc rằng liệu đường dẫn này có trỏ đến 1 file trong hệ thống hay không, Hàm `toRealPath` giúp ta
 
 Metadata (siêu dữ liệu) là "dữ liệu của dữ liệu", nó mô tả về thông tin của dữ liệu, ví dụ: người tạo ra nó, người thay đổi, ngày thay đổi, tiêu đề, mô tả, loại, kích thước...
 
